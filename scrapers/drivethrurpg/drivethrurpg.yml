@@ -5,6 +5,7 @@ kind: scraper
 target: book
 homepage: https://www.drivethrurpg.com
 description: Book metadata (authors, artists, publisher, page count, genres, ISBN) from DriveThruRPG.
+author: hunter-read
 attribution: Data from DriveThruRPG (drivethrurpg.com)
 grimoire_min_version: 1.5.5
 

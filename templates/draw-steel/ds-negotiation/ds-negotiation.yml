@@ -5,4 +5,5 @@ kind: note-template
 system: Draw Steel
 category: Encounters
 description: A Draw Steel negotiation with interest, patience, motivations, and pitfalls.
+author: hunter-read
 grimoire_min_version: 1.5.6

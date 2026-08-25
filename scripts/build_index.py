@@ -146,7 +146,7 @@ def build() -> tuple[dict, list[str]]:
             "requires_script": "script" in data,
             "sha256": sha256(manifest_path),
         }
-        for optional in ("description", "homepage", "grimoire_min_version"):
+        for optional in ("description", "homepage", "author", "grimoire_min_version"):
             if optional in data:
                 entry[optional] = data[optional]
 
@@ -238,7 +238,7 @@ def build_templates() -> tuple[dict, list[str]]:
             "sha256": sha256(manifest_path),
             "body_sha256": sha256(body_path),
         }
-        for optional in ("system", "category", "description", "grimoire_min_version"):
+        for optional in ("system", "category", "description", "author", "grimoire_min_version"):
             if optional in data:
                 entry[optional] = data[optional]
 

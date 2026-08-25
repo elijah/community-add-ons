@@ -4,4 +4,5 @@ version: 1.0.0
 kind: note-template
 category: Locations
 description: A place the party can visit, with sights, people, and hooks.
+author: hunter-read
 grimoire_min_version: 1.5.6

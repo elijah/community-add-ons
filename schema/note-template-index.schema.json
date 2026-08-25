@@ -40,6 +40,11 @@
             "description": "Folder path relative to templates/. Empty for a template at the top level."
           },
           "system": { "type": "string" },
+          "author": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Who wrote this. A GitHub username (e.g. 'hunter-read', or '@hunter-read') links to that profile in Grimoire; any other text is credited without a link."
+          },
           "category": { "type": "string" },
           "description": { "type": "string" },
           "grimoire_min_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },

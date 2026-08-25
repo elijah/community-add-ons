@@ -22,9 +22,32 @@ kind: scraper
 target: game-system
 description: One line, shown in the add-on browser.
 homepage: https://example.com
+author: octocat          # you — a GitHub username or a display name
 attribution: Data from Example (example.com)
 grimoire_min_version: 1.5.5
 ```
+
+### `author` vs `attribution`
+
+Two different credits, and they are usually two different people:
+
+- **`author`** is *you*, whoever wrote the add-on. Grimoire shows it as a
+  "by octocat" byline on the add-on in the browser. Give a **GitHub username**
+  and it links to your profile — `hunter-read` renders a GitHub icon pointing at
+  `https://github.com/hunter-read`. A leading `@` works too, as does the full
+  profile URL. A plain display name is fine and is credited without the icon.
+  Optional — omit it to stay anonymous.
+- **`attribution`** credits the **upstream data source** the add-on scrapes,
+  and is shown next to the fetched metadata rather than on the add-on itself.
+  Use it to satisfy whatever the source asks for.
+
+Grimoire derives the profile link from the username itself rather than reading a
+URL out of the manifest, and the name always renders as plain text with only the
+icon clickable. The byline therefore cannot point anywhere but a GitHub profile
+— use `homepage` to link somewhere else.
+
+The same `author` field, with the same meaning, is available on
+[note templates](note-templates.md) and themes.
 
 ## `target` — what it populates
 

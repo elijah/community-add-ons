@@ -5,4 +5,5 @@ kind: note-template
 system: D&D 5e
 category: Items
 description: A magic item with rarity, attunement, properties, and charges.
+author: hunter-read
 grimoire_min_version: 1.5.6

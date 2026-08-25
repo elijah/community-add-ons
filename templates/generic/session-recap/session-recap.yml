@@ -4,4 +4,5 @@ version: 1.0.0
 kind: note-template
 category: Sessions
 description: A recap of what happened, who was there, and what comes next.
+author: hunter-read
 grimoire_min_version: 1.5.6

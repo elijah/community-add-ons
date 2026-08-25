@@ -5,4 +5,5 @@ kind: note-template
 system: Draw Steel
 category: Encounters
 description: A Draw Steel montage test with objective, challenges, and success/failure outcomes.
+author: hunter-read
 grimoire_min_version: 1.5.6
