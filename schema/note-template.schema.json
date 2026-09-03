@@ -46,6 +46,11 @@
       "type": "string",
       "format": "uri"
     },
+    "author": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Who wrote this. A GitHub username (e.g. 'hunter-read', or '@hunter-read') links to that profile in Grimoire; any other text is credited without a link."
+    },
     "attribution": {
       "type": "string",
       "description": "Credit line, for a template adapted from a published source."

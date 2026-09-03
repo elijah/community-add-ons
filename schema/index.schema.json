@@ -27,6 +27,11 @@
             "type": "string",
             "description": "Repo-relative path to the add-on manifest."
           },
+          "author": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Who wrote this. A GitHub username (e.g. 'hunter-read', or '@hunter-read') links to that profile in Grimoire; any other text is credited without a link."
+          },
           "requires_script": {
             "type": "boolean",
             "description": "True when the add-on ships a Python script. Drives the install-time trust prompt."

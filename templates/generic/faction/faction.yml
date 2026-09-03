@@ -4,4 +4,5 @@ version: 1.0.0
 kind: note-template
 category: Factions
 description: An organisation with goals, assets, and relationships.
+author: hunter-read
 grimoire_min_version: 1.5.6

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "mode": "dark",
   "app_mode": "grimoire",
-  "author": "Grimoire",
+  "author": "hunter-read",
   "description": "Maximum legibility in both light and dark: pure black or pure white surfaces, full-strength text, and saturated accents. Every foreground clears WCAG AAA (7:1) against every background, and the low-contrast greys of the default theme are gone. Follows System, so it tracks your OS setting. Raises luminance contrast only — it does not address colourblindness, which needs more than a change of colour.",
   "homepage": "https://github.com/grimoire-codex/community-add-ons",
   "grimoire_min_version": "1.5.6",

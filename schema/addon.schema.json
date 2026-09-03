@@ -36,6 +36,11 @@
       "type": "string",
       "format": "uri"
     },
+    "author": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Who wrote this add-on. A GitHub username (e.g. 'hunter-read', or '@hunter-read') links to that profile in Grimoire; any other text is credited without a link. Distinct from 'attribution', which credits the upstream data source."
+    },
     "attribution": {
       "type": "string",
       "description": "Credit line shown in the UI next to fetched data."

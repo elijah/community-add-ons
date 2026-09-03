@@ -4,4 +4,5 @@ version: 1.0.0
 kind: note-template
 category: Quests
 description: An adventure hook with the pitch, stakes, and rewards.
+author: hunter-read
 grimoire_min_version: 1.5.6

@@ -37,6 +37,7 @@ kind: note-template
 system: D&D 5e            # omit for a system-agnostic template
 category: Spells          # groups the template in the browser
 description: One line, shown under the name.
+author: octocat           # you — a GitHub username or a display name
 grimoire_min_version: 1.5.6
 ```
 
@@ -53,6 +54,7 @@ this format at all.
 | `system` | no | Free text, e.g. `D&D 5e`. Omit for system-agnostic |
 | `category` | no | Groups templates in the browser. Defaults to `General` |
 | `description` | no | One line |
+| `author` | no | You — a GitHub username (linked to your profile) or a plain display name, shown as a "by octocat" credit |
 | `body` | no | Markdown filename. Defaults to `<id>.md` |
 | `grimoire_min_version` | no | Minimum Grimoire version |
 

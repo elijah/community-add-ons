@@ -5,4 +5,5 @@ kind: note-template
 system: D&D 5e
 category: Characters
 description: A non-player character with statblock, motivation, and plot hooks.
+author: hunter-read
 grimoire_min_version: 1.5.6

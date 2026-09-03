@@ -5,6 +5,7 @@ kind: scraper
 target: game-system
 homepage: https://ttrpgwiki.com
 description: System metadata (publisher, year, family, dice, licence, genre) for 236 tabletop RPGs.
+author: hunter-read
 attribution: Data from TTRPG Wiki (ttrpgwiki.com)
 grimoire_min_version: 1.5.5
 

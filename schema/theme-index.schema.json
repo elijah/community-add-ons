@@ -66,7 +66,9 @@
             ]
           },
           "author": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 120,
+            "description": "Who wrote this. A GitHub username (e.g. 'hunter-read', or '@hunter-read') links to that profile in Grimoire; any other text is credited without a link."
           },
           "description": {
             "type": "string"

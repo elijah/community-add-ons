@@ -5,4 +5,5 @@ kind: note-template
 system: Draw Steel
 category: Encounters
 description: A Draw Steel combat encounter with victories, terrain, enemy roster, and objectives.
+author: hunter-read
 grimoire_min_version: 1.5.6
