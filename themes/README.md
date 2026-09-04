@@ -87,6 +87,11 @@ Status: `danger`, `warning`, `success`, and the older `red` / `green` / `blue`.
 Content types, which must stay distinguishable from each other: `type-book`,
 `type-map`, `type-token`, `type-audio`, `type-file`.
 
+`variant` marks an item that has other versions — the version picker, the
+gallery badge, the duplicate compare view. It reads as a quiet annotation rather
+than a call to action, so it wants to be distinguishable from `accent` without
+competing with it.
+
 Over artwork: `on-media` and `on-media-border` sit on `scrim` / `scrim-strong`.
 These stay light-on-dark in both modes, because the page theme says nothing
 about what a user's cover image looks like underneath.

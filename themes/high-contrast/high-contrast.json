@@ -47,7 +47,8 @@
       "type-map": "#9ecfff",
       "type-token": "#7dffb0",
       "type-audio": "#ffc48c",
-      "type-file": "#ffe680"
+      "type-file": "#ffe680",
+      "variant": "#5fe3d6"
     },
     "light": {
       "bg-deep": "#ffffff",
@@ -87,7 +88,8 @@
       "type-map": "#00457a",
       "type-token": "#005c2e",
       "type-audio": "#8a3b00",
-      "type-file": "#6b4a00"
+      "type-file": "#6b4a00",
+      "variant": "#00504a"
     }
   }
 }

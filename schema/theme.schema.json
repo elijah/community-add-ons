@@ -64,7 +64,7 @@
         "pattern": "^[a-z0-9-]+$"
       },
       "patternProperties": {
-        "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file)$": {
+        "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file|variant)$": {
           "type": "string",
           "maxLength": 64,
           "pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([\\d.,%/ ]+\\)|hsla?\\([\\d.,%/deg ]+\\)|transparent|currentcolor|inherit)$",
@@ -86,7 +86,7 @@
             "pattern": "^[a-z0-9-]+$"
           },
           "patternProperties": {
-            "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file)$": {
+            "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file|variant)$": {
               "type": "string",
               "maxLength": 64,
               "pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([\\d.,%/ ]+\\)|hsla?\\([\\d.,%/deg ]+\\)|transparent|currentcolor|inherit)$",
@@ -102,7 +102,7 @@
             "pattern": "^[a-z0-9-]+$"
           },
           "patternProperties": {
-            "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file)$": {
+            "^(bg-deep|bg-panel|bg-card|bg-card-hover|bg-input|border|border-light|accent|accent-dim|accent-bright|accent-alt|on-accent|text|text-dim|text-muted|red|green|blue|danger|danger-fill|on-danger|on-media|on-media-border|warning|success|tag-bg|tag-border|mark-bg|invite-bg|overlay|shadow|scrim|scrim-strong|type-book|type-map|type-token|type-audio|type-file|variant)$": {
               "type": "string",
               "maxLength": 64,
               "pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([\\d.,%/ ]+\\)|hsla?\\([\\d.,%/deg ]+\\)|transparent|currentcolor|inherit)$",
