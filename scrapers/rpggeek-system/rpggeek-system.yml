@@ -1,6 +1,6 @@
 id: rpggeek-system
 name: RPGGeek (System)
-version: 1.0.0
+version: 1.0.1
 kind: scraper
 target: game-system
 homepage: https://rpggeek.com
