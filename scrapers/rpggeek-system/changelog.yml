@@ -1,6 +1,6 @@
 - version: 1.0.2
   changes:
-    - "Improved build process for faster future changes"
+    - "Improved plugin build process for faster future changes"
 - version: 1.0.1
   changes:
     - "Fixed token authorisation issues by migrating to boardgamegeek.com endpoints"
