@@ -1,0 +1,7 @@
+- version: 1.0.1
+  changes:
+    - Added author attribution field
+    - Fixed surfacing of superseded editions
+- version: 1.0.0
+  changes:
+    - Initial release of the TTRPG Wiki scraper
