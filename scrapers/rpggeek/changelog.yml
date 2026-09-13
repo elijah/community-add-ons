@@ -1,6 +1,3 @@
-- version: 1.0.2
-  changes:
-    - "Standardised endpoint domain to make fixing issues such as those in 1.0.1 easier to resolve"
 - version: 1.0.1
   changes:
     - "Fixed token authorisation issues by migrating to boardgamegeek.com endpoints"
