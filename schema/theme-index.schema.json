@@ -10,6 +10,10 @@
   ],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
     "version": {
       "const": 1
     },

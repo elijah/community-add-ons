@@ -7,6 +7,10 @@
   "required": ["version", "templates"],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
     "version": { "const": 1 },
     "generated": { "type": "string", "format": "date-time" },
     "folders": {
