@@ -157,6 +157,14 @@ def build() -> tuple[dict, list[str]]:
                 continue
             entry["script_sha256"] = sha256(script_path)
 
+        changelog_path = manifest_path.parent / "changelog.yml"
+        if changelog_path.is_file():
+            try:
+                changelog_data = yaml.safe_load(changelog_path.read_text())
+                entry["changelog"] = changelog_data
+            except yaml.YAMLError as exc:
+                errors.append(f"{rel}: invalid changelog YAML: {exc}")
+
         addons.append(entry)
 
     index = {

@@ -1,0 +1,6 @@
+- version: 1.0.1
+  changes:
+    - "Fixed token authorisation issues by migrating to boardgamegeek.com endpoints"
+- version: 1.0.0
+  changes:
+    - "Initial release of the RPGGeek scraper"
