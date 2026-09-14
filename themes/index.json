@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-13T10:39:51Z",
+  "generated": "2026-09-14T22:35:13Z",
   "themes": [
     {
       "id": "high-contrast",
@@ -16,6 +16,23 @@
       "app_mode": "grimoire",
       "author": "hunter-read",
       "description": "Maximum legibility in both light and dark: pure black or pure white surfaces, full-strength text, and saturated accents. Every foreground clears WCAG AAA (7:1) against every background, and the low-contrast greys of the default theme are gone. Follows System, so it tracks your OS setting. Raises luminance contrast only \u2014 it does not address colourblindness, which needs more than a change of colour.",
+      "homepage": "https://github.com/grimoire-codex/community-add-ons",
+      "grimoire_min_version": "1.5.6"
+    },
+    {
+      "id": "one-dark",
+      "name": "One Dark",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "path": "themes/one-dark/one-dark.json",
+      "sha256": "110c080d890ab344f745e4c484bdb2318e4630508d9676cc4af835b3a62cbcce",
+      "app_mode": "grimoire",
+      "author": "hunter-read",
+      "description": "Atom's One Dark and One Light, brought to Grimoire. The familiar editor palette \u2014 slate-blue surfaces and soft syntax hues in dark, warm off-white and deeper inks in light \u2014 with the gold accent traded for One's blue. Follows System, so it tracks your OS setting.",
       "homepage": "https://github.com/grimoire-codex/community-add-ons",
       "grimoire_min_version": "1.5.6"
     }
