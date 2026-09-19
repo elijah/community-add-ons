@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Validate this repo's contents and regenerate its three index files.
+"""Validate this repo's contents and regenerate its four index files.
 
   index.json            add-ons (scrapers) — installed by an admin
   templates/index.json  note templates — browsed and downloaded by a GM
   themes/index.json     colour themes — installed per user
+  character-sheets/index.json  character sheets — installed per user
 
 Run with --check to verify the committed indexes are up to date (what CI does
 on a PR); run with no arguments to rewrite them.
@@ -41,6 +42,8 @@ THEME_DIR = ROOT / "themes"
 INDEX_PATH = ROOT / "index.json"
 TEMPLATE_INDEX_PATH = TEMPLATE_DIR / "index.json"
 THEME_INDEX_PATH = THEME_DIR / "index.json"
+SHEET_DIR = ROOT / "character-sheets"
+SHEET_INDEX_PATH = SHEET_DIR / "index.json"
 # Optional per-folder metadata (display name), not an add-on itself.
 FOLDER_META = "_folder.yml"
 
@@ -359,6 +362,111 @@ def build_themes() -> tuple[dict, list[str]]:
     return index, errors
 
 
+def discover_sheets() -> list[pathlib.Path]:
+    """Every character sheet, as character-sheets/<id>/<id>.json."""
+    if not SHEET_DIR.is_dir():
+        return []
+    found = []
+    for entry in sorted(SHEET_DIR.iterdir()):
+        if not entry.is_dir() or entry.name.startswith("."):
+            continue
+        candidate = entry / f"{entry.name}.json"
+        if candidate.is_file():
+            found.append(candidate)
+    return found
+
+
+def build_sheets() -> tuple[dict, list[str]]:
+    """Validate every character sheet and build the catalogue Grimoire browses.
+
+    Sheets follow themes rather than add-ons: a user installs one into their own
+    account, nothing executes, and no admin approves it. The index carries the
+    file's digest, which Grimoire verifies on download.
+
+    A sheet describing a licensed game must carry that licence's required
+    credit in `attribution`, which Grimoire renders verbatim. Several open
+    licences mandate exact wording, so the check here is only that it is
+    present — getting it *right* is the author's job, and the per-sheet README
+    is where the wording is recorded.
+    """
+    schema = json.loads((ROOT / "schema" / "character-sheet.schema.json").read_text())
+    validator = jsonschema.Draft202012Validator(schema)
+    errors: list[str] = []
+    sheets = []
+
+    for sheet_path in discover_sheets():
+        rel = sheet_path.relative_to(ROOT).as_posix()
+        try:
+            data = json.loads(sheet_path.read_text())
+        except json.JSONDecodeError as exc:
+            errors.append(f"{rel}: invalid JSON: {exc}")
+            continue
+
+        # `$schema` is an editor affordance, not part of the document.
+        data.pop("$schema", None)
+
+        schema_errors = sorted(validator.iter_errors(data), key=lambda e: list(e.path))
+        if schema_errors:
+            for err in schema_errors:
+                loc = "/".join(str(p) for p in err.path) or "(root)"
+                errors.append(f"{rel}: {loc}: {err.message}")
+            continue
+
+        if data["id"] != sheet_path.parent.name:
+            errors.append(
+                f"{rel}: id '{data['id']}' does not match directory "
+                f"'{sheet_path.parent.name}'"
+            )
+            continue
+
+        # A select field without options renders as an empty dropdown, which the
+        # app rejects on install — catch it here instead, where the author is.
+        for field_name, definition in data["fields"].items():
+            if definition.get("type") == "select" and not definition.get("options"):
+                errors.append(f"{rel}: select field '{field_name}' has no options")
+
+        # Licensed content must credit its source. A sheet naming a licence but
+        # no attribution is the easy mistake, and the one that matters.
+        if data.get("license") and not data.get("attribution"):
+            errors.append(
+                f"{rel}: 'license' is set but 'attribution' is missing — "
+                "a licensed sheet must carry the credit Grimoire displays"
+            )
+
+        entry = {
+            "id": data["id"],
+            "name": data["name"],
+            "version": data["version"],
+            "path": rel,
+            "sha256": sha256(sheet_path),
+            "custom_layout": bool(data.get("layout_html")),
+            "field_count": len(data["fields"]),
+        }
+        for optional in (
+            "system", "description", "author", "homepage",
+            "license", "license_url", "attribution", "grimoire_min_version",
+        ):
+            if data.get(optional):
+                entry[optional] = data[optional]
+        sheets.append(entry)
+
+    index = {
+        "version": 1,
+        "generated": dt.datetime.now(dt.timezone.utc)
+        .isoformat(timespec="seconds")
+        .replace("+00:00", "Z"),
+        "sheets": sorted(sheets, key=lambda s: s["id"]),
+    }
+
+    index_schema = json.loads(
+        (ROOT / "schema" / "character-sheet-index.schema.json").read_text()
+    )
+    for err in jsonschema.Draft202012Validator(index_schema).iter_errors(index):
+        errors.append(f"character-sheets/index.json: {err.message}")
+
+    return index, errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -371,7 +479,8 @@ def main() -> int:
     index, errors = build()
     template_index, template_errors = build_templates()
     theme_index, theme_errors = build_themes()
-    errors = errors + template_errors + theme_errors
+    sheet_index, sheet_errors = build_sheets()
+    errors = errors + template_errors + theme_errors + sheet_errors
     if errors:
         print("Validation failed:")
         for err in errors:
@@ -380,14 +489,16 @@ def main() -> int:
 
     print(
         f"Validated {len(index['addons'])} add-on(s), "
-        f"{len(template_index['templates'])} note template(s), and "
-        f"{len(theme_index['themes'])} theme(s)."
+        f"{len(template_index['templates'])} note template(s), "
+        f"{len(theme_index['themes'])} theme(s), and "
+        f"{len(sheet_index['sheets'])} character sheet(s)."
     )
 
     targets = [
         (INDEX_PATH, index, "addons"),
         (TEMPLATE_INDEX_PATH, template_index, "templates"),
         (THEME_INDEX_PATH, theme_index, "themes"),
+        (SHEET_INDEX_PATH, sheet_index, "sheets"),
     ]
 
     if args.check:

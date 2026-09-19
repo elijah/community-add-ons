@@ -1,0 +1,488 @@
+{
+  "$schema": "../../schema/character-sheet.schema.json",
+  "id": "draw-steel",
+  "name": "Draw Steel",
+  "version": "1.0.0",
+  "system": "Draw Steel",
+  "description": "A hero sheet for MCDM's Draw Steel: five characteristics, stamina and recoveries, a heroic resource, and abilities with power-roll tiers.",
+  "author": "hunter-read",
+  "homepage": "https://www.mcdmproductions.com/draw-steel-creator-license",
+  "license": "Draw Steel Creator License",
+  "license_url": "https://www.mcdmproductions.com/draw-steel-creator-license",
+  "attribution": "Grimoire is an independent product published under the DRAW STEEL Creator License and is not affiliated with MCDM Productions, LLC. DRAW STEEL © 2026 MCDM Productions, LLC.",
+  "content_types": {
+    "class": {
+      "label": "Class",
+      "label_plural": "Classes",
+      "identity_field": "name",
+      "sort_default": [
+        "name"
+      ],
+      "search_fields": [
+        "name",
+        "description"
+      ],
+      "filter_fields": [
+        "heroic_resource"
+      ],
+      "compact_display": "{name} — {heroic_resource}",
+      "fields": {
+        "name": {
+          "type": "text",
+          "label": "Name"
+        },
+        "heroic_resource": {
+          "type": "text",
+          "label": "Heroic Resource"
+        },
+        "starting_stamina": {
+          "type": "number",
+          "label": "Starting Stamina"
+        },
+        "stamina_per_level": {
+          "type": "number",
+          "label": "Stamina per Level"
+        },
+        "recoveries": {
+          "type": "number",
+          "label": "Recoveries"
+        },
+        "characteristics": {
+          "type": "text",
+          "label": "Characteristics"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description"
+        }
+      }
+    },
+    "ancestry": {
+      "label": "Ancestry",
+      "label_plural": "Ancestries",
+      "identity_field": "name",
+      "sort_default": [
+        "name"
+      ],
+      "search_fields": [
+        "name",
+        "description"
+      ],
+      "filter_fields": [],
+      "compact_display": "{name} — size {size}",
+      "fields": {
+        "name": {
+          "type": "text",
+          "label": "Name"
+        },
+        "size": {
+          "type": "text",
+          "label": "Size"
+        },
+        "speed": {
+          "type": "number",
+          "label": "Speed"
+        },
+        "traits": {
+          "type": "textarea",
+          "label": "Signature Traits"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description"
+        }
+      }
+    },
+    "kit": {
+      "label": "Kit",
+      "label_plural": "Kits",
+      "identity_field": "name",
+      "sort_default": [
+        "name"
+      ],
+      "search_fields": [
+        "name",
+        "description"
+      ],
+      "filter_fields": [
+        "armor",
+        "weapon"
+      ],
+      "compact_display": "{name} — {armor}, {weapon}",
+      "fields": {
+        "name": {
+          "type": "text",
+          "label": "Name"
+        },
+        "armor": {
+          "type": "text",
+          "label": "Armour"
+        },
+        "weapon": {
+          "type": "text",
+          "label": "Weapon"
+        },
+        "stamina_bonus": {
+          "type": "number",
+          "label": "Stamina Bonus"
+        },
+        "speed_bonus": {
+          "type": "number",
+          "label": "Speed Bonus"
+        },
+        "stability_bonus": {
+          "type": "number",
+          "label": "Stability Bonus"
+        },
+        "damage_bonus": {
+          "type": "text",
+          "label": "Damage Bonus"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description"
+        }
+      }
+    },
+    "ability": {
+      "label": "Ability",
+      "label_plural": "Abilities",
+      "identity_field": "name",
+      "sort_default": [
+        "cost",
+        "name"
+      ],
+      "search_fields": [
+        "name",
+        "keywords",
+        "description"
+      ],
+      "filter_fields": [
+        "type",
+        "cost",
+        "keywords"
+      ],
+      "compact_display": "{name} — {type} ({cost})",
+      "fields": {
+        "name": {
+          "type": "text",
+          "label": "Name"
+        },
+        "cost": {
+          "type": "text",
+          "label": "Cost"
+        },
+        "type": {
+          "type": "text",
+          "label": "Type"
+        },
+        "keywords": {
+          "type": "text",
+          "label": "Keywords"
+        },
+        "distance": {
+          "type": "text",
+          "label": "Distance"
+        },
+        "target": {
+          "type": "text",
+          "label": "Target"
+        },
+        "power_roll": {
+          "type": "text",
+          "label": "Power Roll"
+        },
+        "tier_1": {
+          "type": "text",
+          "label": "≤11"
+        },
+        "tier_2": {
+          "type": "text",
+          "label": "12–16"
+        },
+        "tier_3": {
+          "type": "text",
+          "label": "17+"
+        },
+        "effect": {
+          "type": "textarea",
+          "label": "Effect"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description"
+        }
+      }
+    }
+  },
+  "fields": {
+    "hero_name": {
+      "type": "text",
+      "label": "Name"
+    },
+    "level": {
+      "type": "number",
+      "label": "Level",
+      "min": 1,
+      "max": 10,
+      "default": 1
+    },
+    "ancestry": {
+      "type": "content_ref",
+      "label": "Ancestry",
+      "content_type": "ancestry"
+    },
+    "klass": {
+      "type": "content_ref",
+      "label": "Class",
+      "content_type": "class"
+    },
+    "subclass": {
+      "type": "text",
+      "label": "Subclass"
+    },
+    "kit": {
+      "type": "content_ref",
+      "label": "Kit",
+      "content_type": "kit"
+    },
+    "career": {
+      "type": "text",
+      "label": "Career"
+    },
+    "complication": {
+      "type": "text",
+      "label": "Complication"
+    },
+    "might": {
+      "type": "number",
+      "label": "Might",
+      "min": -5,
+      "max": 5,
+      "default": 0
+    },
+    "agility": {
+      "type": "number",
+      "label": "Agility",
+      "min": -5,
+      "max": 5,
+      "default": 0
+    },
+    "reason": {
+      "type": "number",
+      "label": "Reason",
+      "min": -5,
+      "max": 5,
+      "default": 0
+    },
+    "intuition": {
+      "type": "number",
+      "label": "Intuition",
+      "min": -5,
+      "max": 5,
+      "default": 0
+    },
+    "presence": {
+      "type": "number",
+      "label": "Presence",
+      "min": -5,
+      "max": 5,
+      "default": 0
+    },
+    "stamina_max": {
+      "type": "number",
+      "label": "Stamina Maximum",
+      "min": 0,
+      "default": 20
+    },
+    "stamina_current": {
+      "type": "number",
+      "label": "Current Stamina",
+      "default": 20
+    },
+    "recoveries_max": {
+      "type": "number",
+      "label": "Recoveries",
+      "min": 0,
+      "default": 8
+    },
+    "recoveries_used": {
+      "type": "number",
+      "label": "Recoveries Spent",
+      "min": 0,
+      "default": 0
+    },
+    "heroic_resource": {
+      "type": "number",
+      "label": "Heroic Resource",
+      "min": 0,
+      "default": 0
+    },
+    "resource_name": {
+      "type": "text",
+      "label": "Resource Name",
+      "placeholder": "Focus, Drama, Ferocity…"
+    },
+    "victories": {
+      "type": "number",
+      "label": "Victories",
+      "min": 0,
+      "default": 0
+    },
+    "renown": {
+      "type": "number",
+      "label": "Renown",
+      "min": 0,
+      "default": 0
+    },
+    "speed": {
+      "type": "number",
+      "label": "Speed",
+      "min": 0,
+      "default": 5
+    },
+    "stability": {
+      "type": "number",
+      "label": "Stability",
+      "min": 0,
+      "default": 0
+    },
+    "size": {
+      "type": "text",
+      "label": "Size",
+      "placeholder": "1M"
+    },
+    "abilities": {
+      "type": "content_list",
+      "label": "Abilities",
+      "content_type": "ability",
+      "allow_freeform": true
+    },
+    "skills": {
+      "type": "multiselect",
+      "label": "Skills",
+      "options": [
+        "Alertness",
+        "Architecture",
+        "Blacksmithing",
+        "Brag",
+        "Carpentry",
+        "Climb",
+        "Culture",
+        "Deceive",
+        "Drive",
+        "Empathize",
+        "Endurance",
+        "Flirt",
+        "Gymnastics",
+        "Handle Animals",
+        "Heal",
+        "Hide",
+        "History",
+        "Interrogate",
+        "Intimidate",
+        "Jump",
+        "Lead",
+        "Lie",
+        "Lift",
+        "Magic",
+        "Monsters",
+        "Music",
+        "Nature",
+        "Navigate",
+        "Perform",
+        "Persuade",
+        "Pick Lock",
+        "Pick Pocket",
+        "Read Person",
+        "Ride",
+        "Rumors",
+        "Search",
+        "Sneak",
+        "Society",
+        "Strategy",
+        "Swim",
+        "Timescape"
+      ]
+    },
+    "equipment": {
+      "type": "list",
+      "label": "Equipment",
+      "columns": [
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Item",
+          "flex": 3
+        },
+        {
+          "key": "qty",
+          "type": "number",
+          "label": "Qty",
+          "default": 1,
+          "min": 0,
+          "flex": 1
+        },
+        {
+          "key": "notes",
+          "type": "text",
+          "label": "Notes",
+          "flex": 2
+        }
+      ]
+    },
+    "notes": {
+      "type": "textarea",
+      "label": "Notes",
+      "rows": 6
+    }
+  },
+  "computed": {
+    "recoveries_left": {
+      "formula": "max(0, recoveries_max - recoveries_used)",
+      "label": "Recoveries Left"
+    },
+    "recovery_value": {
+      "formula": "floor(stamina_max / 3)",
+      "label": "Recovery Value"
+    },
+    "winded": {
+      "formula": "floor(stamina_max / 2)",
+      "label": "Winded At"
+    },
+    "is_winded": {
+      "formula": "stamina_current <= winded ? 'Winded' : 'Steady'",
+      "label": "Condition"
+    },
+    "dying_at": {
+      "formula": "0 - winded",
+      "label": "Dying At"
+    },
+    "ability_count": {
+      "formula": "count_refs(abilities)",
+      "label": "Abilities Known"
+    },
+    "might_display": {
+      "formula": "signed(might)",
+      "label": "Might"
+    },
+    "agility_display": {
+      "formula": "signed(agility)",
+      "label": "Agility"
+    },
+    "reason_display": {
+      "formula": "signed(reason)",
+      "label": "Reason"
+    },
+    "intuition_display": {
+      "formula": "signed(intuition)",
+      "label": "Intuition"
+    },
+    "presence_display": {
+      "formula": "signed(presence)",
+      "label": "Presence"
+    }
+  },
+  "layout_html": "<div class=\"sheet-ds\">\n  <header class=\"identity\">\n    <g-field name=\"hero_name\" />\n    <div class=\"identity-row\">\n      <g-field name=\"klass\" /><g-field name=\"subclass\" />\n      <g-field name=\"level\" /><g-field name=\"ancestry\" />\n      <g-field name=\"career\" /><g-field name=\"kit\" />\n    </div>\n  </header>\n\n  <section class=\"chars\">\n      <div class=\"char\">\n        <g-label name=\"might\" />\n        <g-field name=\"might\" label=\"\" />\n      </div>\n      <div class=\"char\">\n        <g-label name=\"agility\" />\n        <g-field name=\"agility\" label=\"\" />\n      </div>\n      <div class=\"char\">\n        <g-label name=\"reason\" />\n        <g-field name=\"reason\" label=\"\" />\n      </div>\n      <div class=\"char\">\n        <g-label name=\"intuition\" />\n        <g-field name=\"intuition\" label=\"\" />\n      </div>\n      <div class=\"char\">\n        <g-label name=\"presence\" />\n        <g-field name=\"presence\" label=\"\" />\n      </div>\n  </section>\n\n  <section class=\"vitals\">\n    <div class=\"stat\"><span class=\"stat-label\">Stamina</span><g-field name=\"stamina_current\" label=\"\" /></div>\n    <div class=\"stat\"><span class=\"stat-label\">Maximum</span><g-value name=\"stamina_max\" /></div>\n    <div class=\"stat\"><span class=\"stat-label\">Winded At</span><g-value name=\"winded\" /></div>\n    <div class=\"stat\"><span class=\"stat-label\">Dying At</span><g-value name=\"dying_at\" /></div>\n    <div class=\"stat\"><span class=\"stat-label\">Recovery</span><g-value name=\"recovery_value\" /></div>\n    <div class=\"stat\"><span class=\"stat-label\">Recoveries</span><g-value name=\"recoveries_left\" /></div>\n  </section>\n\n  <section class=\"resource\">\n    <g-field name=\"resource_name\" /><g-field name=\"heroic_resource\" />\n    <g-field name=\"victories\" /><g-field name=\"renown\" />\n    <g-field name=\"speed\" /><g-field name=\"stability\" /><g-field name=\"size\" />\n  </section>\n\n  <div class=\"columns\">\n    <div class=\"col\">\n      <g-section title=\"Skills\"><g-field name=\"skills\" label=\"\" /></g-section>\n      <g-section title=\"Complication\"><g-field name=\"complication\" label=\"\" /></g-section>\n      <g-section title=\"Equipment\"><g-field name=\"equipment\" label=\"\" /></g-section>\n    </div>\n    <div class=\"col wide\">\n      <g-section title=\"Abilities\"><g-field name=\"abilities\" label=\"\" /></g-section>\n      <g-section title=\"Notes\"><g-field name=\"notes\" label=\"\" /></g-section>\n    </div>\n  </div>\n\n  <g-field name=\"stamina_max\" />\n  <g-field name=\"recoveries_max\" />\n  <g-field name=\"recoveries_used\" />\n</div>",
+  "styles": ".sheet-ds { display: grid; gap: 18px; }\n.identity { display: grid; gap: 10px; }\n.identity-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }\n.chars { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }\n.char { text-align: center; border: 1px solid var(--border); border-radius: 10px; padding: 8px 6px; }\n.vitals, .resource { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }\n.stat { text-align: center; border: 1px solid var(--border); border-radius: 10px; padding: 8px; }\n.stat-label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }\n.columns { display: grid; grid-template-columns: 1fr 2fr; gap: 18px; }\n.col { display: grid; gap: 14px; align-content: start; }\n@media (max-width: 720px) { .columns { grid-template-columns: 1fr; } }"
+}

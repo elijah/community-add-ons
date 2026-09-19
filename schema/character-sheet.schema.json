@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/character-sheet.schema.json",
+  "title": "Grimoire character sheet",
+  "description": "A schema-driven character sheet: the fields a character has, the values derived from them, and how the sheet is drawn. Grimoire renders any sheet here without game-specific code.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "fields"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+([-_][a-z0-9]+)*$",
+      "description": "Lowercase, hyphenated; must match the directory name."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "system": {
+      "type": "string",
+      "description": "The game this sheet is for, shown in the picker. Display-only."
+    },
+    "description": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Who wrote this sheet. A GitHub username (e.g. 'hunter-read') links to that profile in Grimoire; any other text is credited without a link."
+    },
+    "homepage": {
+      "type": "string"
+    },
+    "grimoire_min_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "license": {
+      "type": "string",
+      "description": "The licence the sheet's content is published under (e.g. 'CC-BY-4.0', 'ORC', 'Draw Steel Creator License')."
+    },
+    "license_url": {
+      "type": "string"
+    },
+    "attribution": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Credit for the upstream game, rendered verbatim in Grimoire wherever this sheet is browsed or used. Some licences require exact wording — reproduce it here character for character."
+    },
+    "fields": {
+      "type": "object",
+      "description": "The editable state of a character, keyed by field name.",
+      "minProperties": 1,
+      "maxProperties": 500,
+      "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "text",
+              "number",
+              "textarea",
+              "checkbox",
+              "select",
+              "multiselect",
+              "list",
+              "content_ref",
+              "content_list"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "default": {},
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40
+          },
+          "options": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Required for type 'select'. Either plain values or {value, label} objects.",
+            "items": {
+              "oneOf": [
+                {
+                  "type": [
+                    "string",
+                    "number"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "type": [
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "label": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "visible_if": {
+            "type": "string",
+            "description": "An expression; the field is drawn only when it is true. A condition that cannot be evaluated shows the field, because hiding part of a sheet over a broken expression would cost the player access to their own data."
+          },
+          "columns": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "description": "Required for type 'list'. Each column is a field definition with a 'key'. A column may be any scalar type but not another list.",
+            "items": {
+              "type": "object",
+              "required": [
+                "key"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+                },
+                "type": {
+                  "enum": [
+                    "text",
+                    "number",
+                    "checkbox",
+                    "select",
+                    "textarea"
+                  ]
+                },
+                "label": {
+                  "type": "string"
+                },
+                "default": {},
+                "flex": {
+                  "type": "number"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "options": {
+                  "type": "array",
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          "content_type": {
+            "type": "string",
+            "description": "Required for content_ref/content_list: the content type this field picks from. Must be one the schema declares."
+          },
+          "per_entry_fields": {
+            "type": "object",
+            "description": "The character's own notes on a referenced entry — prepared, equipped, uses remaining. Ordinary field definitions.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "allow_freeform": {
+            "type": "boolean",
+            "description": "Lets a player type an entry instead of picking one, so the catalog stays optional."
+          },
+          "add_label": {
+            "type": "string"
+          },
+          "empty_text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "computed": {
+      "type": "object",
+      "description": "Values derived from fields. Read-only, recalculated on every read, never stored.",
+      "maxProperties": 500,
+      "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "formula"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "formula": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An expression over other fields. Arithmetic, comparison, logic, and the closed function table: floor, ceil, round, abs, min, max, sum, len, if, clamp, signed. Parsed, never executed."
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "layout": {
+      "type": "array",
+      "description": "The simple sheet: sections of fields, drawn in a responsive grid. Omit it (and layout_html) and Grimoire lists every field in declaration order.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "field"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "field": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "visible_if": {
+            "type": "string",
+            "description": "The whole section is drawn only when this expression is true."
+          }
+        }
+      }
+    },
+    "layout_html": {
+      "type": "string",
+      "maxLength": 262144,
+      "description": "A custom sheet, as an HTML template. Structural tags plus the directives g-field, g-computed, g-label, g-value, g-section, g-if, g-repeat. The template is parsed to an AST and rendered as components — it never becomes markup — so scripts, event handlers, form controls, and unsafe URLs are rejected outright."
+    },
+    "styles": {
+      "type": "string",
+      "maxLength": 131072,
+      "description": "CSS for layout_html. Every selector is scoped to the sheet and properties are allowlisted, so a sheet cannot restyle the app around it. url() is rejected wherever it appears."
+    },
+    "validators": {
+      "type": "array",
+      "maxItems": 200,
+      "description": "Rules checked against a character. A rule states what should be true, so a false result is reported. They never block saving.",
+      "items": {
+        "type": "object",
+        "required": [
+          "rule",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "enum": [
+              "warning",
+              "error"
+            ]
+          },
+          "field": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "content_types": {
+      "type": "object",
+      "maxProperties": 50,
+      "description": "Typed catalogs a character can reference — spells, classes, feats. A content type is a field schema applied to entries rather than to a character.",
+      "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "fields"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "label_plural": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "identity_field": {
+            "type": "string",
+            "description": "The entry's name — what a reference shows and what the catalog sorts by. Must be one of the type's own fields."
+          },
+          "sort_default": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "search_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filter_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "compact_display": {
+            "type": "string",
+            "description": "A one-line template like '{name} — {school} {level}'. Every {token} must name one of the type's fields."
+          },
+          "fields": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}
