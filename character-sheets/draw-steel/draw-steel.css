@@ -1,0 +1,242 @@
+/* Draw Steel hero sheet styling.
+   Bolder and squarer than the D&D sheet, matching Draw Steel's own look, and
+   built from Grimoire's palette tokens so it follows the reader's theme. */
+
+.sheet-ds {
+  display: grid;
+  gap: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+/* --- banner ------------------------------------------------------------- */
+
+.banner {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: 16px;
+  align-items: end;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+}
+
+.banner-name input {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.banner-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+/* --- characteristics ---------------------------------------------------- */
+
+.characteristics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+  gap: 10px;
+}
+
+.char-box {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 8px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.char-name {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.char-box input {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 4px;
+}
+
+/* --- vitals ------------------------------------------------------------- */
+
+.vitals-row {
+  display: grid;
+  grid-template-columns: minmax(200px, 1.3fr) minmax(140px, 0.8fr) 2fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.stamina,
+.resource {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+
+.stamina-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stamina-line input {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 110px;
+}
+
+.stamina-max {
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+.stamina-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.stamina-marks .state {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.resource {
+  text-align: center;
+}
+
+.resource input {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.resource-hint {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 8px;
+}
+
+.tile {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px 4px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.tile-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.15;
+}
+
+.tile-label {
+  display: block;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* --- panels ------------------------------------------------------------- */
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.side,
+.wide {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+
+.panel-title {
+  margin: 0 0 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+}
+
+.count {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.extras {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+}
+
+.extras summary {
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .banner,
+  .columns,
+  .vitals-row {
+    grid-template-columns: 1fr;
+  }
+}

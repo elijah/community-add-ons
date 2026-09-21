@@ -278,12 +278,12 @@
     "layout_html": {
       "type": "string",
       "maxLength": 262144,
-      "description": "A custom sheet, as an HTML template. Structural tags plus the directives g-field, g-computed, g-label, g-value, g-section, g-if, g-repeat. The template is parsed to an AST and rendered as components — it never becomes markup — so scripts, event handlers, form controls, and unsafe URLs are rejected outright."
+      "description": "A custom sheet as an HTML template, written inline. Prefer 'layout_file' for anything longer than a line or two — HTML embedded in JSON has to be escaped, which makes it unreadable and unmaintainable."
     },
     "styles": {
       "type": "string",
       "maxLength": 131072,
-      "description": "CSS for layout_html. Every selector is scoped to the sheet and properties are allowlisted, so a sheet cannot restyle the app around it. url() is rejected wherever it appears."
+      "description": "CSS for the layout, written inline. Prefer 'styles_file' for anything substantial."
     },
     "validators": {
       "type": "array",
@@ -375,6 +375,16 @@
           }
         }
       }
+    },
+    "layout_file": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "A sibling .html file holding the layout, instead of inlining it. Defaults to '<id>.html' when that file exists. This is how a real sheet should be written: the HTML stays HTML, with syntax highlighting and no escaping."
+    },
+    "styles_file": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "A sibling .css file holding the stylesheet, instead of inlining it. Defaults to '<id>.css' when that file exists."
     }
   }
 }

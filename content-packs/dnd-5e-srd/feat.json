@@ -1,0 +1,107 @@
+[
+  {
+    "_id": "alert",
+    "name": "Alert",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You gain a bonus to Initiative equal to your Proficiency Bonus, and you can swap Initiative with a willing ally."
+  },
+  {
+    "_id": "crafter",
+    "name": "Crafter",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You gain tool proficiencies, a discount on nonmagical items, and can craft faster."
+  },
+  {
+    "_id": "healer",
+    "name": "Healer",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You can use a Healer's Kit to restore hit points, and your healing rolls treat a 1 as a 2."
+  },
+  {
+    "_id": "lucky",
+    "name": "Lucky",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You have Luck Points equal to your Proficiency Bonus, spent to gain Advantage or impose Disadvantage."
+  },
+  {
+    "_id": "magic-initiate",
+    "name": "Magic Initiate",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You learn two cantrips and one level 1 spell from a chosen class's spell list."
+  },
+  {
+    "_id": "musician",
+    "name": "Musician",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You gain musical instrument proficiencies and can grant Heroic Inspiration after a rest."
+  },
+  {
+    "_id": "savage-attacker",
+    "name": "Savage Attacker",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "Once per turn you can reroll a melee weapon's damage dice and use either total."
+  },
+  {
+    "_id": "skilled",
+    "name": "Skilled",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "You gain proficiency in any combination of three skills or tools."
+  },
+  {
+    "_id": "tavern-brawler",
+    "name": "Tavern Brawler",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "Your Unarmed Strike damage increases, and you can push a target as a bonus effect."
+  },
+  {
+    "_id": "tough",
+    "name": "Tough",
+    "category": "Origin",
+    "prerequisite": "",
+    "description": "Your hit point maximum increases by twice your character level."
+  },
+  {
+    "_id": "ability-score-improvement",
+    "name": "Ability Score Improvement",
+    "category": "General",
+    "prerequisite": "Level 4+",
+    "description": "Increase one ability score by 2, or two scores by 1 each, to a maximum of 20."
+  },
+  {
+    "_id": "grappler",
+    "name": "Grappler",
+    "category": "General",
+    "prerequisite": "Level 4+, Strength or Dexterity 13+",
+    "description": "You have Advantage on attacks against creatures you are grappling."
+  },
+  {
+    "_id": "great-weapon-master",
+    "name": "Great Weapon Master",
+    "category": "General",
+    "prerequisite": "Level 4+, Strength 13+",
+    "description": "Heavy weapon crits and kills grant a bonus attack; you can trade accuracy for damage."
+  },
+  {
+    "_id": "sharpshooter",
+    "name": "Sharpshooter",
+    "category": "General",
+    "prerequisite": "Level 4+, Dexterity 13+",
+    "description": "Your ranged attacks ignore cover and suffer no long-range Disadvantage."
+  },
+  {
+    "_id": "war-caster",
+    "name": "War Caster",
+    "category": "General",
+    "prerequisite": "Level 4+, spellcasting ability",
+    "description": "You have Advantage on Concentration saves and can cast as an Opportunity Attack."
+  }
+]

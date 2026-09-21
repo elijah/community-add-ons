@@ -1,0 +1,238 @@
+/* Pathfinder 2e sheet styling.
+   Denser than the D&D sheet, as PF2e's own is: proficiency ranks sit under the
+   values they feed, so the arithmetic stays visible rather than hidden behind
+   a derived number. */
+
+.sheet-pf2 {
+  display: grid;
+  gap: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+/* --- headline ----------------------------------------------------------- */
+
+.headline {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: 16px;
+  align-items: end;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+}
+
+.headline-name input {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.headline-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+/* --- abilities ---------------------------------------------------------- */
+
+.abilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 8px;
+}
+
+.ability {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 6px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.ability-name {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.ability input {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 3px;
+}
+
+/* --- defences ----------------------------------------------------------- */
+
+.defences {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  gap: 10px;
+}
+
+.defence {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+/* AC is the one a player reads constantly, so it is marked out. */
+.defence.ac {
+  border-color: var(--gold-dim);
+}
+
+.defence-value {
+  display: block;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gold);
+}
+
+.defence-label {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.defence-prof select {
+  font-size: 11px;
+  padding: 3px 4px;
+}
+
+/* --- hit points --------------------------------------------------------- */
+
+.hp-band {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 2.2fr;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+
+.hp-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hp-line input {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 110px;
+}
+
+.hp-max {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.hp-conditions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 10px;
+}
+
+/* --- panels ------------------------------------------------------------- */
+
+.columns {
+  display: grid;
+  gap: 16px;
+}
+
+.wide {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+
+.panel-title {
+  margin: 0 0 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+}
+
+.spell-head {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: end;
+}
+
+.mini {
+  text-align: center;
+}
+
+.mini-value {
+  display: block;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+}
+
+.extras {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+}
+
+.extras summary {
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .headline,
+  .hp-band {
+    grid-template-columns: 1fr;
+  }
+}

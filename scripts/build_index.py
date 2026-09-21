@@ -6,6 +6,10 @@
   themes/index.json     colour themes — installed per user
   character-sheets/index.json  character sheets — installed per user
 
+Content packs under `content-packs/` have no index: an admin installs one by
+copying its directory into the server's content directory, so there is nothing
+for Grimoire to browse. They are validated here all the same.
+
 Run with --check to verify the committed indexes are up to date (what CI does
 on a PR); run with no arguments to rewrite them.
 
@@ -43,6 +47,7 @@ INDEX_PATH = ROOT / "index.json"
 TEMPLATE_INDEX_PATH = TEMPLATE_DIR / "index.json"
 THEME_INDEX_PATH = THEME_DIR / "index.json"
 SHEET_DIR = ROOT / "character-sheets"
+PACK_DIR = ROOT / "content-packs"
 SHEET_INDEX_PATH = SHEET_DIR / "index.json"
 # Optional per-folder metadata (display name), not an add-on itself.
 FOLDER_META = "_folder.yml"
@@ -376,6 +381,24 @@ def discover_sheets() -> list[pathlib.Path]:
     return found
 
 
+def _sidecar(data: dict, directory: pathlib.Path, key: str, extension: str):
+    """The sibling file a sheet keeps its layout or stylesheet in.
+
+    Named explicitly via ``key``, or found by convention as ``<id><extension>``.
+    Returns ``(path, error)`` — the path is None when the sheet has no such
+    file, which is not an error; a *named* file that is missing is.
+    """
+    named = data.get(key)
+    if named:
+        candidate = directory / str(named)
+        if not candidate.is_file():
+            return None, f"{key} '{named}' not found"
+        return candidate, ""
+
+    conventional = directory / f"{data['id']}{extension}"
+    return (conventional if conventional.is_file() else None), ""
+
+
 def build_sheets() -> tuple[dict, list[str]]:
     """Validate every character sheet and build the catalogue Grimoire browses.
 
@@ -433,15 +456,34 @@ def build_sheets() -> tuple[dict, list[str]]:
                 "a licensed sheet must carry the credit Grimoire displays"
             )
 
+        # A sheet's layout and stylesheet may live in sibling files rather than
+        # being inlined as JSON strings — HTML embedded in JSON has to be
+        # escaped, which makes it unreadable and all but unmaintainable. Named
+        # explicitly, or found by convention as `<id>.html` / `<id>.css`.
+        directory = sheet_path.parent
+        layout_file, layout_error = _sidecar(data, directory, "layout_file", ".html")
+        styles_file, styles_error = _sidecar(data, directory, "styles_file", ".css")
+        for problem in (layout_error, styles_error):
+            if problem:
+                errors.append(f"{rel}: {problem}")
+        if layout_error or styles_error:
+            continue
+
         entry = {
             "id": data["id"],
             "name": data["name"],
             "version": data["version"],
             "path": rel,
             "sha256": sha256(sheet_path),
-            "custom_layout": bool(data.get("layout_html")),
+            "custom_layout": bool(data.get("layout_html") or layout_file),
             "field_count": len(data["fields"]),
         }
+        if layout_file:
+            entry["layout_path"] = layout_file.relative_to(ROOT).as_posix()
+            entry["layout_sha256"] = sha256(layout_file)
+        if styles_file:
+            entry["styles_path"] = styles_file.relative_to(ROOT).as_posix()
+            entry["styles_sha256"] = sha256(styles_file)
         for optional in (
             "system", "description", "author", "homepage",
             "license", "license_url", "attribution", "grimoire_min_version",
@@ -467,6 +509,75 @@ def build_sheets() -> tuple[dict, list[str]]:
     return index, errors
 
 
+def check_content_packs() -> list[str]:
+    """Validate every content pack, without building an index.
+
+    A pack is installed by copying its directory onto a server, not downloaded
+    from a catalogue, so there is no index and no digest to publish. What there
+    is to check is that the metadata parses, that each content file is a list of
+    objects carrying a unique `_id`, and that licensed content credits its
+    source — the same rules Grimoire's loader applies, applied here so a bad
+    pack fails in CI rather than on someone's server.
+    """
+    if not PACK_DIR.is_dir():
+        return []
+
+    schema = json.loads((ROOT / "schema" / "content-pack.schema.json").read_text())
+    validator = jsonschema.Draft202012Validator(schema)
+    errors: list[str] = []
+    count = 0
+
+    for directory in sorted(p for p in PACK_DIR.iterdir() if p.is_dir()):
+        meta_path = directory / "_meta.json"
+        rel = meta_path.relative_to(ROOT).as_posix()
+        if not meta_path.is_file():
+            errors.append(f"{directory.relative_to(ROOT)}: no _meta.json")
+            continue
+        try:
+            meta = json.loads(meta_path.read_text())
+        except json.JSONDecodeError as exc:
+            errors.append(f"{rel}: invalid JSON: {exc}")
+            continue
+
+        for err in validator.iter_errors(meta):
+            errors.append(f"{rel}: {err.message}")
+        if meta.get("pack_id") and meta["pack_id"] != directory.name:
+            errors.append(
+                f"{rel}: pack_id {meta['pack_id']!r} does not match the "
+                f"directory {directory.name!r}"
+            )
+
+        for content_file in sorted(directory.glob("*.json")):
+            if content_file.name == "_meta.json":
+                continue
+            crel = content_file.relative_to(ROOT).as_posix()
+            try:
+                entries = json.loads(content_file.read_text())
+            except json.JSONDecodeError as exc:
+                errors.append(f"{crel}: invalid JSON: {exc}")
+                continue
+            if not isinstance(entries, list):
+                errors.append(f"{crel}: must be an array of entries")
+                continue
+            seen: set[str] = set()
+            for index, entry in enumerate(entries):
+                if not isinstance(entry, dict):
+                    errors.append(f"{crel}: entry {index} is not an object")
+                    continue
+                entry_id = entry.get("_id")
+                if not isinstance(entry_id, str) or not entry_id.strip():
+                    errors.append(f"{crel}: entry {index} has no '_id'")
+                    continue
+                if entry_id in seen:
+                    errors.append(f"{crel}: defines {entry_id!r} twice")
+                seen.add(entry_id)
+            count += len(entries)
+
+    if count:
+        print(f"Validated {count} content pack entr{'y' if count == 1 else 'ies'}.")
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -480,7 +591,8 @@ def main() -> int:
     template_index, template_errors = build_templates()
     theme_index, theme_errors = build_themes()
     sheet_index, sheet_errors = build_sheets()
-    errors = errors + template_errors + theme_errors + sheet_errors
+    pack_errors = check_content_packs()
+    errors = errors + template_errors + theme_errors + sheet_errors + pack_errors
     if errors:
         print("Validation failed:")
         for err in errors:

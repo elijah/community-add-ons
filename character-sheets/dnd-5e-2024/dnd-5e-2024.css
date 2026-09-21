@@ -1,0 +1,277 @@
+/* D&D 5e (2024) sheet styling.
+   Follows the published sheet's shape — a narrow ability rail on the left, the
+   combat stats as a row of shields across the top right — using Grimoire's own
+   palette tokens so it still obeys the reader's theme. */
+
+.sheet-5e {
+  display: grid;
+  gap: 16px;
+}
+
+/* --- nameplate ---------------------------------------------------------- */
+
+.nameplate {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: 16px;
+  align-items: end;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+}
+
+.nameplate-main input {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.nameplate-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.field-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+/* --- two-column body ---------------------------------------------------- */
+
+.sheet-body {
+  display: grid;
+  grid-template-columns: 216px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.rail,
+.main {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+/* --- abilities ---------------------------------------------------------- */
+
+.ability-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.ability-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 6px 6px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.ability-name {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* The modifier is what gets rolled, so it is the big number; the score sits
+   under it in a small box, as on the printed sheet. */
+.ability-mod {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gold);
+}
+
+.ability-box input {
+  text-align: center;
+  font-size: 13px;
+  padding: 3px;
+  max-width: 64px;
+  margin: 2px auto 0;
+}
+
+/* --- panels ------------------------------------------------------------- */
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+
+.panel-title {
+  margin: 0 0 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+}
+
+.line-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.line-table td {
+  padding: 3px 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.line-table .tick {
+  width: 20px;
+}
+
+.line-table .num {
+  width: 34px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.passive {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.passive-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.passive-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* --- combat row --------------------------------------------------------- */
+
+.combat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.shield-stat {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.shield-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gold);
+}
+
+.shield-label {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* --- hit points --------------------------------------------------------- */
+
+.hp-panel {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 2fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.hp-current input {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hp-side {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
+}
+
+/* --- spellcasting ------------------------------------------------------- */
+
+.spell-head {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: end;
+}
+
+.mini-stat {
+  text-align: center;
+}
+
+.mini-value {
+  display: block;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+}
+
+/* --- secondary details -------------------------------------------------- */
+
+.extras {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+}
+
+.extras summary {
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 12px 0;
+}
+
+/* One column on a phone: a 216px rail beside anything is unreadable there. */
+@media (max-width: 760px) {
+  .sheet-body,
+  .nameplate,
+  .hp-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .ability-stack {
+    grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  }
+}

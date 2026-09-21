@@ -4,15 +4,28 @@ Schema-driven character sheets for Grimoire. A user installs the ones they want
 and builds characters against them — a sheet never changes what anyone else
 sees, so, like [themes](../themes/README.md), it needs no admin approval.
 
-Each sheet is a directory named after its `id`, holding a single JSON file of
-the same name:
+Each sheet is a directory named after its `id`, holding a JSON file of the same
+name — plus, for a sheet with a custom layout, its HTML and CSS beside it:
 
 ```
 character-sheets/
-└── cairn/
-    ├── cairn.json    # required — the sheet
-    └── README.md     # optional, but the right home for licence wording
+├── cairn/
+│   ├── cairn.json    # required — the sheet
+│   └── README.md     # optional, but the right home for licence wording
+└── dnd-5e-2024/
+    ├── dnd-5e-2024.json   # fields, computed values, content types
+    ├── dnd-5e-2024.html   # the layout, as real HTML
+    ├── dnd-5e-2024.css    # the stylesheet, as real CSS
+    └── README.md
 ```
+
+A sheet with a custom layout should keep it in **sibling `.html` and `.css`
+files** rather than inlining it. HTML embedded in a JSON string has to be
+escaped, which turns a readable layout into one unbroken line of `\"` and `\n`
+— unwritable, and worse to review. The files are found by convention as
+`<id>.html` and `<id>.css`, or named explicitly with `layout_file` and
+`styles_file`. Grimoire folds them back into one document when the sheet is
+installed, each verified against its own digest.
 
 Run `python3 scripts/build_index.py` after adding or editing one; CI checks that
 `character-sheets/index.json` is current.
@@ -82,7 +95,8 @@ responsive grid. Omit it and Grimoire lists every field in declaration order.
 That is a perfectly good sheet for a rules-light game, and it needs no design
 work.
 
-For a sheet that should look like its published original, use `layout_html`.
+For a sheet that should look like its published original, write a layout — in
+its own `.html` file, as below.
 
 ## Custom HTML sheets
 
@@ -111,10 +125,11 @@ parts go:
 | `<g-if test="...">` | Its contents, when the expression is true |
 | `<g-repeat over="...">` | Its contents once per row of a list field |
 
-Add CSS in `styles`:
+Put the CSS in `<id>.css` beside it. Inline `styles` still works for a rule or
+two, but a real sheet's stylesheet belongs in a file:
 
 ```json
-"styles": ".sheet { display: grid; grid-template-columns: 1fr 2fr; gap: 12px }"
+{ "layout_file": "my-sheet.html", "styles_file": "my-sheet.css" }
 ```
 
 ### What is and is not allowed

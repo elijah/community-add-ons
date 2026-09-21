@@ -1,0 +1,139 @@
+<!-- Draw Steel hero sheet.
+     Follows the published sheet: the five characteristics in a row across the
+     top (they are bonuses, not scores, so they read as a strip rather than a
+     column), stamina given the prominence the rules give it, and the heroic
+     resource called out beside it. -->
+<div class="sheet-ds">
+
+  <header class="banner">
+    <div class="banner-name">
+      <span class="field-label">Hero</span>
+      <g-field name="hero_name" label="" />
+    </div>
+    <div class="banner-meta">
+      <div><span class="field-label">Class</span><g-field name="klass" label="" /></div>
+      <div><span class="field-label">Subclass</span><g-field name="subclass" label="" /></div>
+      <div><span class="field-label">Level</span><g-field name="level" label="" /></div>
+      <div><span class="field-label">Ancestry</span><g-field name="ancestry" label="" /></div>
+      <div><span class="field-label">Career</span><g-field name="career" label="" /></div>
+      <div><span class="field-label">Kit</span><g-field name="kit" label="" /></div>
+    </div>
+  </header>
+
+  <!-- Characteristics are bonuses used directly, so they read as one strip. -->
+  <section class="characteristics">
+    <div class="char-box">
+      <span class="char-name">Might</span>
+      <g-field name="might" label="" />
+    </div>
+    <div class="char-box">
+      <span class="char-name">Agility</span>
+      <g-field name="agility" label="" />
+    </div>
+    <div class="char-box">
+      <span class="char-name">Reason</span>
+      <g-field name="reason" label="" />
+    </div>
+    <div class="char-box">
+      <span class="char-name">Intuition</span>
+      <g-field name="intuition" label="" />
+    </div>
+    <div class="char-box">
+      <span class="char-name">Presence</span>
+      <g-field name="presence" label="" />
+    </div>
+  </section>
+
+  <section class="vitals-row">
+    <div class="stamina">
+      <span class="field-label">Stamina</span>
+      <div class="stamina-line">
+        <g-field name="stamina_current" label="" />
+        <span class="stamina-max">/ <g-value name="stamina_max" /></span>
+      </div>
+      <div class="stamina-marks">
+        <span>Winded at <g-value name="winded" /></span>
+        <span>Dying at <g-value name="dying_at" /></span>
+        <span class="state"><g-value name="is_winded" /></span>
+      </div>
+    </div>
+
+    <div class="resource">
+      <span class="field-label"><g-value name="resource_name" /></span>
+      <g-field name="heroic_resource" label="" />
+      <span class="resource-hint">Heroic resource</span>
+    </div>
+
+    <div class="tile-grid">
+      <div class="tile">
+        <span class="tile-value"><g-value name="recoveries_left" /></span>
+        <span class="tile-label">Recoveries</span>
+      </div>
+      <div class="tile">
+        <span class="tile-value"><g-value name="recovery_value" /></span>
+        <span class="tile-label">Recovery</span>
+      </div>
+      <div class="tile">
+        <span class="tile-value"><g-value name="speed" /></span>
+        <span class="tile-label">Speed</span>
+      </div>
+      <div class="tile">
+        <span class="tile-value"><g-value name="stability" /></span>
+        <span class="tile-label">Stability</span>
+      </div>
+      <div class="tile">
+        <span class="tile-value"><g-value name="victories" /></span>
+        <span class="tile-label">Victories</span>
+      </div>
+      <div class="tile">
+        <span class="tile-value"><g-value name="renown" /></span>
+        <span class="tile-label">Renown</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="columns">
+    <aside class="side">
+      <section class="panel">
+        <h3 class="panel-title">Skills</h3>
+        <g-field name="skills" label="" />
+      </section>
+      <section class="panel">
+        <h3 class="panel-title">Complication</h3>
+        <g-field name="complication" label="" />
+      </section>
+      <section class="panel">
+        <h3 class="panel-title">Equipment</h3>
+        <g-field name="equipment" label="" />
+      </section>
+    </aside>
+
+    <main class="wide">
+      <section class="panel">
+        <h3 class="panel-title">
+          Abilities <span class="count"><g-value name="ability_count" /></span>
+        </h3>
+        <g-field name="abilities" label="" />
+      </section>
+      <section class="panel">
+        <h3 class="panel-title">Notes</h3>
+        <g-field name="notes" label="" />
+      </section>
+    </main>
+  </div>
+
+  <details class="extras">
+    <summary>Other details</summary>
+    <div class="extras-grid">
+      <g-field name="stamina_max" />
+      <g-field name="recoveries_max" />
+      <g-field name="recoveries_used" />
+      <g-field name="resource_name" />
+      <g-field name="size" />
+      <g-field name="speed" />
+      <g-field name="stability" />
+      <g-field name="victories" />
+      <g-field name="renown" />
+    </div>
+  </details>
+</div>

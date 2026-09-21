@@ -1,0 +1,98 @@
+[
+  {
+    "_id": "barbarian",
+    "name": "Barbarian",
+    "hit_die": 12,
+    "primary_ability": "Strength",
+    "saving_throws": "Strength, Constitution",
+    "description": "A fierce warrior who can enter a battle rage."
+  },
+  {
+    "_id": "bard",
+    "name": "Bard",
+    "hit_die": 8,
+    "primary_ability": "Charisma",
+    "saving_throws": "Dexterity, Charisma",
+    "description": "An inspiring magician whose power echoes the music of creation."
+  },
+  {
+    "_id": "cleric",
+    "name": "Cleric",
+    "hit_die": 8,
+    "primary_ability": "Wisdom",
+    "saving_throws": "Wisdom, Charisma",
+    "description": "A priestly champion who wields divine magic in service of a higher power."
+  },
+  {
+    "_id": "druid",
+    "name": "Druid",
+    "hit_die": 8,
+    "primary_ability": "Wisdom",
+    "saving_throws": "Intelligence, Wisdom",
+    "description": "A priest of the Old Faith, wielding the powers of nature."
+  },
+  {
+    "_id": "fighter",
+    "name": "Fighter",
+    "hit_die": 10,
+    "primary_ability": "Strength or Dexterity",
+    "saving_throws": "Strength, Constitution",
+    "description": "A master of martial combat, skilled with a variety of weapons and armour."
+  },
+  {
+    "_id": "monk",
+    "name": "Monk",
+    "hit_die": 8,
+    "primary_ability": "Dexterity and Wisdom",
+    "saving_throws": "Strength, Dexterity",
+    "description": "A master of martial arts, harnessing inner power."
+  },
+  {
+    "_id": "paladin",
+    "name": "Paladin",
+    "hit_die": 10,
+    "primary_ability": "Strength and Charisma",
+    "saving_throws": "Wisdom, Charisma",
+    "description": "A holy warrior bound to a sacred oath."
+  },
+  {
+    "_id": "ranger",
+    "name": "Ranger",
+    "hit_die": 10,
+    "primary_ability": "Dexterity and Wisdom",
+    "saving_throws": "Strength, Dexterity",
+    "description": "A warrior who combats threats on the edges of civilisation."
+  },
+  {
+    "_id": "rogue",
+    "name": "Rogue",
+    "hit_die": 8,
+    "primary_ability": "Dexterity",
+    "saving_throws": "Dexterity, Intelligence",
+    "description": "A scoundrel who uses stealth and trickery to overcome obstacles."
+  },
+  {
+    "_id": "sorcerer",
+    "name": "Sorcerer",
+    "hit_die": 6,
+    "primary_ability": "Charisma",
+    "saving_throws": "Constitution, Charisma",
+    "description": "A spellcaster who draws on inherent magic from a gift or bloodline."
+  },
+  {
+    "_id": "warlock",
+    "name": "Warlock",
+    "hit_die": 8,
+    "primary_ability": "Charisma",
+    "saving_throws": "Wisdom, Charisma",
+    "description": "A wielder of magic derived from a bargain with an extraplanar entity."
+  },
+  {
+    "_id": "wizard",
+    "name": "Wizard",
+    "hit_die": 6,
+    "primary_ability": "Intelligence",
+    "saving_throws": "Intelligence, Wisdom",
+    "description": "A scholarly magic-user capable of manipulating the structures of reality."
+  }
+]
