@@ -110,6 +110,28 @@
           ]
         }
       ]
+    },
+    {
+      "id": "bundleofholding",
+      "name": "Bundle of Holding",
+      "kind": "library",
+      "target": "owned-resource",
+      "version": "1.0.0",
+      "path": "library/bundleofholding/bundleofholding.yml",
+      "requires_script": true,
+      "sha256": "8cb88a1ea070b4786ae008e197898996834eb0ebf8d4751b559ef1738209451a",
+      "description": "Track owned RPG bundles from Bundle of Holding",
+      "homepage": "https://bundleofholding.com",
+      "author": "elijah",
+      "grimoire_min_version": "1.5.6",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "changes": [
+            "Initial release of the Bundle of Holding library add-on"
+          ]
+        }
+      ]
     }
   ]
 }
